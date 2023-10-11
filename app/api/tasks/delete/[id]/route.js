@@ -1,17 +1,15 @@
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
-let prisma = new PrismaClient();
-
-export async function DELETE({ params }) {
+export async function DELETE(request, { params }) {
   try {
     const id = params.id;
-    const deleteTask = await prisma.task.delete({
+    await prisma.tasks.delete({
       where: {
         id: id,
       },
     });
-    return NextResponse.json(deleteTask);
+    return NextResponse.json({ message: "ok" });
   } catch (error) {
     console.error("Error in DELETE request", error);
   }

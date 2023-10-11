@@ -45,7 +45,7 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  taskUserId    Task[]    @relation(name: "userId")
+  taskUserId    Tasks[]    @relation(name: "userId")
 }
 
 model VerificationToken {
@@ -56,9 +56,9 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Task {
+model Tasks {
   id        String  @id @default(cuid())
-  title     String
+  task     String
   Status    String
   Priority  String
   User      User?   @relation(name: "userId", fields: [userId], references: [id])

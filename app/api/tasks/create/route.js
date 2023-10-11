@@ -1,12 +1,10 @@
-import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-
-let prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function POST(request) {
   try {
     const { title, Status, Priority, userId } = await request.json();
-    const addTask = await prisma.task.create({
+    const addTask = await prisma.tasks.create({
       data: {
         title: title,
         Status: Status,

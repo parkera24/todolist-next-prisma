@@ -1,13 +1,11 @@
-import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-
-let prisma = new PrismaClient();
+import prisma from "@/lib/prisma";
 
 export async function PATCH(request, { params }) {
   try {
     const id = params.id;
     const { title, Status, Priority } = await request.json();
-    const updateTask = await prisma.task.update({
+    const updateTask = await prisma.tasks.update({
       where: {
         id: id,
       },
